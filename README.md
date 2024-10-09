@@ -2,5 +2,8 @@
 
 Collaborators: Mathilde RAZAFIMAHATRATRA, Steven Essam, Ala MAJDOUB, Ahmed KAMOUN
 
-Ala Ala
-
+Capteurs : 
+- GPS : Ala
+- LightSensor : Steven
+- Barometer : Mathilde
+- Thermometer : Ahmed
