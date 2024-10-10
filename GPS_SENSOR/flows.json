@@ -1,0 +1,96 @@
+[
+    {
+        "id": "e3f06e9735d32e5d",
+        "type": "tab",
+        "label": "GPS",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0414ce3d1d9a869f",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function 5",
+        "func": "msg.payload = {\n    latitude: Number (msg.req.params.latitude),\n    longitude: Number(msg.req.params.longitude),\n    speed: Number(msg.req.params.speed) \n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 160,
+        "wires": [
+            [
+                "12ea6749eeda1f03",
+                "c3e7311d85b2ac5d"
+            ]
+        ]
+    },
+    {
+        "id": "12ea6749eeda1f03",
+        "type": "debug",
+        "z": "e3f06e9735d32e5d",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "5d683a148f3463df",
+        "type": "http in",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "url": "/app/light/:latitude/:longitude/:speed",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 360,
+        "y": 160,
+        "wires": [
+            [
+                "0414ce3d1d9a869f"
+            ]
+        ]
+    },
+    {
+        "id": "1018d293ef1de4f8",
+        "type": "http response",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1000,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c3e7311d85b2ac5d",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function 6",
+        "func": "msg.payload = msg.payload.timestamp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 220,
+        "wires": [
+            [
+                "1018d293ef1de4f8"
+            ]
+        ]
+    }
+]
