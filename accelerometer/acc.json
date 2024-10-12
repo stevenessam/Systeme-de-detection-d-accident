@@ -1,0 +1,55 @@
+[
+    {
+        "id": "941614ad92b7bb3a",
+        "type": "http in",
+        "z": "29e5a927fe9bdbbe",
+        "name": "",
+        "url": "/app/xyz/:xAccel/:yAccel/:zAccel",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 160,
+        "wires": [
+            [
+                "7a5d4bf64486a7f7"
+            ]
+        ]
+    },
+    {
+        "id": "7a5d4bf64486a7f7",
+        "type": "function",
+        "z": "29e5a927fe9bdbbe",
+        "name": "function 7",
+        "func": "msg.payload = {\n    latitude: Number (msg.req.params.xAccel),\n    longitude: Number(msg.req.params.yAccel),\n    speed: Number(msg.req.params.zAccel) \n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 160,
+        "wires": [
+            [
+                "2e74763c6e5683c1"
+            ]
+        ]
+    },
+    {
+        "id": "2e74763c6e5683c1",
+        "type": "debug",
+        "z": "29e5a927fe9bdbbe",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 160,
+        "wires": []
+    }
+]
