@@ -1,6 +1,6 @@
 [
     {
-        "id": "e3f06e9735d32e5d",
+        "id": "668472c3b2ec5a1c",
         "type": "tab",
         "label": "NodeRed_Projet",
         "disabled": false,
@@ -8,11 +8,11 @@
         "env": []
     },
     {
-        "id": "0414ce3d1d9a869f",
+        "id": "712e37dfbacf3b11",
         "type": "function",
-        "z": "e3f06e9735d32e5d",
+        "z": "668472c3b2ec5a1c",
         "name": "function gps",
-        "func": "msg.payload = {\n    latitude: Number(msg.req.params.latitude),\n    longitude: Number(msg.req.params.longitude),\n    speed: Number(msg.req.params.speed)\n};\nreturn msg;",
+        "func": "\nmsg.payload = {\n    latitude: Number(msg.req.params.latitude),\n    longitude: Number(msg.req.params.longitude),\n    speed: Number(msg.req.params.speed)\n \n\n};\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -23,15 +23,15 @@
         "y": 160,
         "wires": [
             [
-                "12ea6749eeda1f03",
-                "788e11207099a70b"
+                "5401146f3ffe7c60",
+                "cbbec4bb4c49637a"
             ]
         ]
     },
     {
-        "id": "12ea6749eeda1f03",
+        "id": "5401146f3ffe7c60",
         "type": "debug",
-        "z": "e3f06e9735d32e5d",
+        "z": "668472c3b2ec5a1c",
         "name": "debug 4",
         "active": true,
         "tosidebar": true,
@@ -46,9 +46,9 @@
         "wires": []
     },
     {
-        "id": "5d683a148f3463df",
+        "id": "c0916321a9679412",
         "type": "http in",
-        "z": "e3f06e9735d32e5d",
+        "z": "668472c3b2ec5a1c",
         "name": "",
         "url": "/app/gps/:latitude/:longitude/:speed",
         "method": "get",
@@ -58,15 +58,15 @@
         "y": 160,
         "wires": [
             [
-                "0414ce3d1d9a869f"
+                "712e37dfbacf3b11"
             ]
         ]
     },
     {
-        "id": "788e11207099a70b",
+        "id": "cbbec4bb4c49637a",
         "type": "influxdb out",
-        "z": "e3f06e9735d32e5d",
-        "influxdb": "5ba7f60809348175",
+        "z": "668472c3b2ec5a1c",
+        "influxdb": "15c01c224ffc15c8",
         "name": "",
         "measurement": "testgps2",
         "precision": "",
@@ -81,9 +81,9 @@
         "wires": []
     },
     {
-        "id": "8938f28c548c63e1",
+        "id": "fde2a924d1c92d1f",
         "type": "http in",
-        "z": "e3f06e9735d32e5d",
+        "z": "668472c3b2ec5a1c",
         "name": "",
         "url": "/app/light/:light",
         "method": "get",
@@ -93,14 +93,14 @@
         "y": 320,
         "wires": [
             [
-                "e31d22b839a3583c"
+                "2f71c5cf3bed0a28"
             ]
         ]
     },
     {
-        "id": "e31d22b839a3583c",
+        "id": "2f71c5cf3bed0a28",
         "type": "function",
-        "z": "e3f06e9735d32e5d",
+        "z": "668472c3b2ec5a1c",
         "name": "function light",
         "func": "msg.payload = {\n    light: Number(msg.req.params.light)\n};\nreturn msg;",
         "outputs": 1,
@@ -113,16 +113,16 @@
         "y": 320,
         "wires": [
             [
-                "12ea6749eeda1f03",
-                "39cecae2dc6fb641"
+                "7904117d67a1301e",
+                "5401146f3ffe7c60"
             ]
         ]
     },
     {
-        "id": "39cecae2dc6fb641",
+        "id": "7904117d67a1301e",
         "type": "influxdb out",
-        "z": "e3f06e9735d32e5d",
-        "influxdb": "5ba7f60809348175",
+        "z": "668472c3b2ec5a1c",
+        "influxdb": "15c01c224ffc15c8",
         "name": "",
         "measurement": "testlight2",
         "precision": "",
@@ -137,10 +137,10 @@
         "wires": []
     },
     {
-        "id": "a6a2586ba301c5a9",
+        "id": "f7a67f0b46805100",
         "type": "influxdb out",
-        "z": "e3f06e9735d32e5d",
-        "influxdb": "5ba7f60809348175",
+        "z": "668472c3b2ec5a1c",
+        "influxdb": "15c01c224ffc15c8",
         "name": "",
         "measurement": "testAccelometre2",
         "precision": "",
@@ -155,9 +155,9 @@
         "wires": []
     },
     {
-        "id": "137321f9e4fc986c",
+        "id": "03d81d90e07d2a6e",
         "type": "function",
-        "z": "e3f06e9735d32e5d",
+        "z": "668472c3b2ec5a1c",
         "name": "function accelerometer",
         "func": "msg.payload = {\n    xAccel: Number(msg.req.params.xAccel),\n    yAccel: Number(msg.req.params.yAccel),\n    zAccel: Number(msg.req.params.zAccel)\n};\nreturn msg;",
         "outputs": 1,
@@ -170,15 +170,15 @@
         "y": 480,
         "wires": [
             [
-                "12ea6749eeda1f03",
-                "a6a2586ba301c5a9"
+                "f7a67f0b46805100",
+                "5401146f3ffe7c60"
             ]
         ]
     },
     {
-        "id": "6d1fad376aa3bb01",
+        "id": "06d5c4b3d0f3733a",
         "type": "http in",
-        "z": "e3f06e9735d32e5d",
+        "z": "668472c3b2ec5a1c",
         "name": "",
         "url": "/app/accelerometer/:xAccel/:yAccel/:zAccel",
         "method": "get",
@@ -188,12 +188,49 @@
         "y": 480,
         "wires": [
             [
-                "137321f9e4fc986c"
+                "03d81d90e07d2a6e"
             ]
         ]
     },
     {
-        "id": "5ba7f60809348175",
+        "id": "f904c9f9d86c08ea",
+        "type": "http in",
+        "z": "668472c3b2ec5a1c",
+        "name": "",
+        "url": "/app/gpsalerte/:speed",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 250,
+        "y": 600,
+        "wires": [
+            [
+                "843e1fae50c5a3ab"
+            ]
+        ]
+    },
+    {
+        "id": "843e1fae50c5a3ab",
+        "type": "function",
+        "z": "668472c3b2ec5a1c",
+        "name": "function gpsalerte",
+        "func": "// Extract the speed from the request parameters\nlet speed = Number(msg.req.query.speed);\n\n// Set up the payload with the speed and alert message\nmsg.payload = {\n    speed: speed, // Define the speed here\n    alert: `Speed Alert!!!: ${speed} km/h` // Use the speed variable in the alert message\n};\n\n// Return the message to the next node\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 600,
+        "wires": [
+            [
+                "5401146f3ffe7c60"
+            ]
+        ]
+    },
+    {
+        "id": "15c01c224ffc15c8",
         "type": "influxdb",
         "hostname": "127.0.0.1",
         "port": "8086",
