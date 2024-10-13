@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  node-red:
+    image: nodered/node-red:latest
+    container_name: node-red
+    restart: unless-stopped
+    ports:
+      - "1880:1880"
+    volumes:
+      - ./node-red-data:/data
+    environment:
+      - TZ=Europe/Paris
+    user: "root"
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./influxdb-data:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DB=project
+      - INFLUXDB_ADMIN_USER=admin  
+      - INFLUXDB_ADMIN_PASSWORD=admin
+      - INFLUXDB_HTTP_AUTH_ENABLED=true
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana-data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin  
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - influxdb
+    user: "root"
