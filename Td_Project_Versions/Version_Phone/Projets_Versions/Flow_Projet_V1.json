@@ -1,0 +1,210 @@
+[
+    {
+        "id": "e3f06e9735d32e5d",
+        "type": "tab",
+        "label": "NodeRed_Projet",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0414ce3d1d9a869f",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function gps",
+        "func": "msg.payload = {\n    latitude: Number(msg.req.params.latitude),\n    longitude: Number(msg.req.params.longitude),\n    speed: Number(msg.req.params.speed)\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 160,
+        "wires": [
+            [
+                "12ea6749eeda1f03",
+                "788e11207099a70b"
+            ]
+        ]
+    },
+    {
+        "id": "12ea6749eeda1f03",
+        "type": "debug",
+        "z": "e3f06e9735d32e5d",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "5d683a148f3463df",
+        "type": "http in",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "url": "/app/gps/:latitude/:longitude/:speed",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 290,
+        "y": 160,
+        "wires": [
+            [
+                "0414ce3d1d9a869f"
+            ]
+        ]
+    },
+    {
+        "id": "788e11207099a70b",
+        "type": "influxdb out",
+        "z": "e3f06e9735d32e5d",
+        "influxdb": "5ba7f60809348175",
+        "name": "",
+        "measurement": "testgps2",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "StevenEssam",
+        "bucket": "testBD",
+        "x": 1080,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "8938f28c548c63e1",
+        "type": "http in",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "url": "/app/light/:light",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "e31d22b839a3583c"
+            ]
+        ]
+    },
+    {
+        "id": "e31d22b839a3583c",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function light",
+        "func": "msg.payload = {\n    light: Number(msg.req.params.light)\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 320,
+        "wires": [
+            [
+                "12ea6749eeda1f03",
+                "39cecae2dc6fb641"
+            ]
+        ]
+    },
+    {
+        "id": "39cecae2dc6fb641",
+        "type": "influxdb out",
+        "z": "e3f06e9735d32e5d",
+        "influxdb": "5ba7f60809348175",
+        "name": "",
+        "measurement": "testlight2",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "StevenEssam",
+        "bucket": "testBD",
+        "x": 1080,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "a6a2586ba301c5a9",
+        "type": "influxdb out",
+        "z": "e3f06e9735d32e5d",
+        "influxdb": "5ba7f60809348175",
+        "name": "",
+        "measurement": "testAccelometre2",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "StevenEssam",
+        "bucket": "testBD",
+        "x": 1110,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "137321f9e4fc986c",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function accelerometer",
+        "func": "msg.payload = {\n    xAccel: Number(msg.req.params.xAccel),\n    yAccel: Number(msg.req.params.yAccel),\n    zAccel: Number(msg.req.params.zAccel)\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 480,
+        "wires": [
+            [
+                "12ea6749eeda1f03",
+                "a6a2586ba301c5a9"
+            ]
+        ]
+    },
+    {
+        "id": "6d1fad376aa3bb01",
+        "type": "http in",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "url": "/app/accelerometer/:xAccel/:yAccel/:zAccel",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 320,
+        "y": 480,
+        "wires": [
+            [
+                "137321f9e4fc986c"
+            ]
+        ]
+    },
+    {
+        "id": "5ba7f60809348175",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "my_influxdb",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    }
+]
