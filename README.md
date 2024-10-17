@@ -1,11 +1,10 @@
-# Cspsw_project_2024
+# Projet Conception de Systèmes Cyber Physiques - Groupe 7 - 2024/2045
 
-Collaborators: Mathilde RAZAFIMAHATRATRA, Steven Essam, Ala MAJDOUB, Ahmed KAMOUN
-
-Capteurs : 
-- GPS : Ala 
-- LightSensor : Mathilde & Steven
-- Accelerometer : Ahmed 
+### Collaborators: 
+- Mathilde RAZAFIMAHATRATRA
+- Steven ESSAM
+- Ala MAJDOUB
+- Ahmed KAMOUN
 
 Diaporama présentation : https://www.canva.com/design/DAGTEElsaJ0/Hx9NNUXJ6LVg4j4wwzIs9w/edit?utm_content=DAGTEElsaJ0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
@@ -30,3 +29,26 @@ Notification Automatique : Si le conducteur ne réduit pas sa vitesse dans un d�
 L'application envoie automatiquement une notification aux contacts d'urgence ou au centre de sécurité. Cette notification contient :
 La localisation GPS exacte.
 L'heure précise de l'incident.
+
+
+# Node-RED Dashboard Setup
+
+### Pour installer Node-RED, utilisez la commande npm fournie avec Node.js :
+- `sudo npm install -g --unsafe-perm node-red`
+
+### Node-RED Dashboard: Permet de créer des interfaces utilisateur.
+- `npm install node-red-dashboard`
+
+### LED Status Indicator: Affiche des indicateurs LED sur le dashboard.
+- `npm install node-red-contrib-ui-led`
+
+### World Map: Affiche une carte du monde interactive sur le dashboard.
+- `npm install node-red-contrib-web-worldmap`
+
+### Table UI Widget: Ajoute un tableau interactif à l'interface.
+- `npm install node-red-node-ui-table`
+
+### InfluxDB Integration: Permet de stocker et interroger des données dans InfluxDB.
+- `npm install node-red-contrib-influxdb`
+
+
