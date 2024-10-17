@@ -1,4 +1,4 @@
-# Projet Conception de Systèmes Cyber Physiques - Groupe 7 - 2024/2045
+# Projet CLSPWS - Groupe 7 - 2024/2045
 
 ### Collaborators: 
 - Mathilde RAZAFIMAHATRATRA
