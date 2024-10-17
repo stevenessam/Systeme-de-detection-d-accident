@@ -1,4 +1,4 @@
-# Projet CLSPWS - Groupe 7 - 2024/2045
+# Projet CLSPWC - Groupe 7 - 2024/2045
 
 ### Collaborators: 
 - Mathilde RAZAFIMAHATRATRA
