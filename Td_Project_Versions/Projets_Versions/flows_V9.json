@@ -1,0 +1,1626 @@
+[
+    {
+        "id": "e3f06e9735d32e5d",
+        "type": "tab",
+        "label": "NodeRed_Projet",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0414ce3d1d9a869f",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function gps",
+        "func": "msg.payload = {\n    lat: Number(msg.req.params.latitude),\n    lon: Number(msg.req.params.longitude),\n    name: \"MyDevice\",\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 180,
+        "wires": [
+            [
+                "12ea6749eeda1f03",
+                "788e11207099a70b",
+                "432edb2e80efa19b",
+                "ded14174eecdca48",
+                "a3e509bc36a7de37"
+            ]
+        ]
+    },
+    {
+        "id": "12ea6749eeda1f03",
+        "type": "debug",
+        "z": "e3f06e9735d32e5d",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "5d683a148f3463df",
+        "type": "http in",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "url": "/app/gps/:latitude/:longitude/:speed",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 330,
+        "y": 200,
+        "wires": [
+            [
+                "0414ce3d1d9a869f",
+                "85e4f6060d1a9292"
+            ]
+        ]
+    },
+    {
+        "id": "788e11207099a70b",
+        "type": "influxdb out",
+        "z": "e3f06e9735d32e5d",
+        "influxdb": "5ba7f60809348175",
+        "name": "",
+        "measurement": "testgps2",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "StevenEssam",
+        "bucket": "testBD",
+        "x": 1280,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "8938f28c548c63e1",
+        "type": "http in",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "url": "/app/light/:light",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 360,
+        "wires": [
+            [
+                "e31d22b839a3583c",
+                "bf7da4f16110cdb4"
+            ]
+        ]
+    },
+    {
+        "id": "e31d22b839a3583c",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function light",
+        "func": "msg.payload = Number(msg.req.params.light);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 360,
+        "wires": [
+            [
+                "12ea6749eeda1f03",
+                "39cecae2dc6fb641",
+                "0ee00a9fc75704e7"
+            ]
+        ]
+    },
+    {
+        "id": "39cecae2dc6fb641",
+        "type": "influxdb out",
+        "z": "e3f06e9735d32e5d",
+        "influxdb": "5ba7f60809348175",
+        "name": "",
+        "measurement": "testlight2",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "StevenEssam",
+        "bucket": "testBD",
+        "x": 1280,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "a6a2586ba301c5a9",
+        "type": "influxdb out",
+        "z": "e3f06e9735d32e5d",
+        "influxdb": "5ba7f60809348175",
+        "name": "",
+        "measurement": "testAccelometre2",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "StevenEssam",
+        "bucket": "testBD",
+        "x": 1310,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "137321f9e4fc986c",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function accelerometer data to DB",
+        "func": "msg.payload = {\n    xAccel: Number(msg.req.params.xAccel),\n    yAccel: Number(msg.req.params.yAccel),\n    zAccel: Number(msg.req.params.zAccel)\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 540,
+        "wires": [
+            [
+                "12ea6749eeda1f03",
+                "a6a2586ba301c5a9"
+            ]
+        ]
+    },
+    {
+        "id": "6d1fad376aa3bb01",
+        "type": "http in",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "url": "/app/accelerometer/:xAccel/:yAccel/:zAccel",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 360,
+        "y": 520,
+        "wires": [
+            [
+                "137321f9e4fc986c",
+                "dbd6b780fa97db6d"
+            ]
+        ]
+    },
+    {
+        "id": "0ee00a9fc75704e7",
+        "type": "ui_gauge",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "group": "b5640878e8218e75",
+        "order": 1,
+        "width": 8,
+        "height": 6,
+        "gtype": "wave",
+        "title": "Light Level",
+        "label": "",
+        "format": "{{msg.payload | number:1}}",
+        "min": "0",
+        "max": "300",
+        "colors": [
+            "#4da3ff",
+            "#d600e6",
+            "#ff8800"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1230,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "432edb2e80efa19b",
+        "type": "ui_worldmap",
+        "z": "e3f06e9735d32e5d",
+        "group": "234b79cc97402da8",
+        "order": 1,
+        "width": 24,
+        "height": 15,
+        "name": "Location Map",
+        "lat": "",
+        "lon": "",
+        "zoom": "18",
+        "layer": "OSMC",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "hide",
+        "layers": "hide",
+        "panit": "true",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "true",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 1240,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "85e4f6060d1a9292",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function speed",
+        "func": "msg.payload = Number(msg.req.params.speed);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 220,
+        "wires": [
+            [
+                "788e11207099a70b",
+                "12ea6749eeda1f03",
+                "99545f9202279ccd"
+            ]
+        ]
+    },
+    {
+        "id": "99545f9202279ccd",
+        "type": "ui_gauge",
+        "z": "e3f06e9735d32e5d",
+        "name": "Speed Level",
+        "group": "234b79cc97402da8",
+        "order": 9,
+        "width": 6,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Speed",
+        "label": "Speed",
+        "format": "{{msg.payload | number:1}}",
+        "min": "0",
+        "max": "10",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1230,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "8206fcf964652fa4",
+        "type": "ui_chart",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "group": "6d85d11fa4458ead",
+        "order": 1,
+        "width": 14,
+        "height": 7,
+        "label": "Accelerometer Status",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1260,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dbd6b780fa97db6d",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function accelerometer chart",
+        "func": "var xAccel = msg.req.params.xAccel;\nvar yAccel = msg.req.params.yAccel;\nvar zAccel = msg.req.params.zAccel;\n\nvar msg1 = { topic: \"xAccel\", payload: xAccel };\nvar msg2 = { topic: \"yAccel\", payload: yAccel };\nvar msg3 = { topic: \"zAccel\", payload: zAccel };\n\nreturn [[msg1, msg2, msg3]];\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 500,
+        "wires": [
+            [
+                "8206fcf964652fa4"
+            ]
+        ]
+    },
+    {
+        "id": "63372a236c469315",
+        "type": "http in",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "url": "/app/alerte/:alertMessage",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 300,
+        "y": 700,
+        "wires": [
+            [
+                "fbf72e5c2eb7271f",
+                "af583d774b39af5c",
+                "eeb123d07cff7735"
+            ]
+        ]
+    },
+    {
+        "id": "fbf72e5c2eb7271f",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function table alert",
+        "func": "// Obtenir la date et l'heure actuelles\nlet now = new Date();\n\n// Formater la date en \"MM/dd/yyyy hh:mm:ss a\"\nlet formattedDate = formatDate(now);\n\n// Récupérer les anciens messages stockés\nlet previousMessages = context.get('messages') || [];\n\n// Ajouter le nouveau message à la liste des messages\npreviousMessages.push({\n    alertMessage: String(msg.req.params.alertMessage),  // Message d'alerte reçu\n    timestamp: formattedDate  // Date générée par Node-RED\n});\n\n// Stocker les messages mis à jour dans le contexte\ncontext.set('messages', previousMessages);\n\n// Envoyer les messages au tableau\nmsg.payload = previousMessages;\n\n// Retourner le message\nreturn msg;\n\n// Fonction pour formater la date\nfunction formatDate(date) {\n    let hours = date.getHours();\n    let minutes = date.getMinutes();\n    let seconds = date.getSeconds();\n    let ampm = hours >= 12 ? 'PM' : 'AM';\n    hours = hours % 12;\n    hours = hours ? hours : 12; // Ajuster pour afficher 12 au lieu de 0\n    minutes = minutes < 10 ? '0' + minutes : minutes;\n    seconds = seconds < 10 ? '0' + seconds : seconds;\n\n    let month = (date.getMonth() + 1).toString().padStart(2, '0'); // Mois commencent à 0\n    let day = date.getDate().toString().padStart(2, '0');\n    let year = date.getFullYear();\n\n    return `${month}/${day}/${year} ${hours}:${minutes}:${seconds} ${ampm}`;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 660,
+        "wires": [
+            [
+                "12ea6749eeda1f03",
+                "5cf546e6baa02cf7",
+                "f8bd97143f13a8df"
+            ]
+        ]
+    },
+    {
+        "id": "5cf546e6baa02cf7",
+        "type": "influxdb out",
+        "z": "e3f06e9735d32e5d",
+        "influxdb": "5ba7f60809348175",
+        "name": "",
+        "measurement": "testAlert2",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "StevenEssam",
+        "bucket": "testBD",
+        "x": 1280,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "f8bd97143f13a8df",
+        "type": "ui_table",
+        "z": "e3f06e9735d32e5d",
+        "group": "add2dd79f12b4e99",
+        "name": "Alert Table",
+        "order": 6,
+        "width": 8,
+        "height": 6,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1230,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "af583d774b39af5c",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function led alert",
+        "func": "if (msg.req && msg.req.params && msg.req.params.alertMessage) {\n    let blinkDuration = 10000; \n    let blinkInterval = 500; \n    let blinkCount = 0; \n\n    let intervalId = setInterval(() => {\n        msg.payload = (blinkCount % 2 === 0) ? \"yellow\" : \"red\"; \n        node.send({ payload: msg.payload }); \n        blinkCount++;\n\n        if (blinkCount * blinkInterval >= blinkDuration) {\n            clearInterval(intervalId); \n            node.send({ payload: true }); \n        }\n    }, blinkInterval);\n} else {\n    msg.payload = true; \n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 700,
+        "wires": [
+            [
+                "b1ecefb4e3c9602c"
+            ]
+        ]
+    },
+    {
+        "id": "b1ecefb4e3c9602c",
+        "type": "ui_led",
+        "z": "e3f06e9735d32e5d",
+        "order": 2,
+        "group": "add2dd79f12b4e99",
+        "width": 8,
+        "height": 4,
+        "label": "",
+        "labelPlacement": "right",
+        "labelAlignment": "center",
+        "colorForValue": [
+            {
+                "color": "#00eb2f",
+                "value": "true",
+                "valueType": "bool"
+            },
+            {
+                "color": "#ff0000",
+                "value": "red",
+                "valueType": "str"
+            },
+            {
+                "color": "#ffff00",
+                "value": "yellow",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Alert Led",
+        "x": 1220,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "a492a5b16897d4c6",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "add2dd79f12b4e99",
+        "order": 3,
+        "width": 8,
+        "height": 1,
+        "name": "Alert Message",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "25",
+        "color": "#ff0000",
+        "x": 1240,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "eeb123d07cff7735",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function text alert",
+        "func": "// Initialize msg.payload to an empty string to avoid displaying \"{}\" initially\nmsg.payload = \"\"; // Clear the text initially\n\nif (msg.req && msg.req.params && msg.req.params.alertMessage) {\n    // If an alert message is received, start blinking the text\n\n    let blinkDuration = 10000; // Total duration for blinking (10 seconds)\n    let blinkInterval = 500; // Blink interval (500 milliseconds = 0.5 seconds)\n\n    let blinkCount = 0; // Counter for the number of blinks\n\n    // Start blinking the text\n    let intervalId = setInterval(() => {\n        // Toggle the text message based on blink count\n        if (blinkCount % 2 === 0) {\n            msg.payload = \"⚠️ Alert Detected ⚠️\"; // Show the alert message\n        } else {\n            msg.payload = \"\"; // Hide the alert message (blank)\n        }\n\n        node.send(msg); // Send the updated message to the text node\n        blinkCount++;\n\n        // Check if the total blink duration is reached\n        if (blinkCount * blinkInterval >= blinkDuration) {\n            clearInterval(intervalId); // Stop blinking\n            node.send({ payload: \"\" }); // Ensure the text is cleared after blinking\n        }\n    }, blinkInterval);\n}\n\n// Return the message\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 740,
+        "wires": [
+            [
+                "a492a5b16897d4c6"
+            ]
+        ]
+    },
+    {
+        "id": "0d48169b5f38b0e7",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "add2dd79f12b4e99",
+        "order": 1,
+        "width": 8,
+        "height": 1,
+        "name": "",
+        "label": "Alert Status",
+        "format": "",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "20",
+        "color": "#ffffff",
+        "x": 1230,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "c735186d3f4a050f",
+        "type": "comment",
+        "z": "e3f06e9735d32e5d",
+        "name": "DASHBOARD",
+        "info": "",
+        "x": 1230,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a79c08df6a88dfe2",
+        "type": "comment",
+        "z": "e3f06e9735d32e5d",
+        "name": "InfluxDB",
+        "info": "",
+        "x": 1220,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "6b7d0e1544d3966e",
+        "type": "comment",
+        "z": "e3f06e9735d32e5d",
+        "name": "Debug",
+        "info": "",
+        "x": 1210,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "7c6bb9def45ca9a7",
+        "type": "comment",
+        "z": "e3f06e9735d32e5d",
+        "name": "HTTP IN",
+        "info": "",
+        "x": 240,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "6463379ea2bbef79",
+        "type": "comment",
+        "z": "e3f06e9735d32e5d",
+        "name": "Functions",
+        "info": "",
+        "x": 680,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ded14174eecdca48",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "234b79cc97402da8",
+        "order": 7,
+        "width": 6,
+        "height": 2,
+        "name": "",
+        "label": "Longitude",
+        "format": "{{msg.payload.lon}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "25",
+        "color": "#ffffff",
+        "x": 1220,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a3e509bc36a7de37",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "234b79cc97402da8",
+        "order": 5,
+        "width": 6,
+        "height": 2,
+        "name": "",
+        "label": "Latitude",
+        "format": "{{msg.payload.lat}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "25",
+        "color": "#ffffff",
+        "x": 1220,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "4304d1fc9d55130e",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "234b79cc97402da8",
+        "order": 3,
+        "width": 6,
+        "height": 1,
+        "name": "",
+        "label": "My Location <i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i>",
+        "format": "",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "35",
+        "color": "#228bec",
+        "x": 1390,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "bf7da4f16110cdb4",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "function light time of day",
+        "func": "// Retrieve threshold values from flow context\nlet morningThreshold = flow.get('morningThreshold') || 300;  // Default to 300 if not set\nlet nightThreshold = flow.get('nightThreshold') || 100;      // Default to 100 if not set\n\n// Get the light value from the incoming message\nlet lightValue = Number(msg.req.params.light);\n\n// Determine time of day based on the thresholds\nif (lightValue > morningThreshold) {\n    msg.payload = \"morning\";\n} else if (lightValue >= nightThreshold && lightValue <= morningThreshold) {\n    msg.payload = \"unknown\";\n} else if (lightValue < nightThreshold) {\n    msg.payload = \"night\";\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 400,
+        "wires": [
+            [
+                "daa36ac0340cc62f",
+                "3495c529eedab969",
+                "874c7558426dc0b3"
+            ]
+        ]
+    },
+    {
+        "id": "daa36ac0340cc62f",
+        "type": "ui_led",
+        "z": "e3f06e9735d32e5d",
+        "order": 5,
+        "group": "b5640878e8218e75",
+        "width": 6,
+        "height": 2,
+        "label": "Morning",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ffa500",
+                "value": "morning",
+                "valueType": "str"
+            },
+            {
+                "color": "#808080",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Morning led",
+        "x": 1230,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "3495c529eedab969",
+        "type": "ui_led",
+        "z": "e3f06e9735d32e5d",
+        "order": 10,
+        "group": "b5640878e8218e75",
+        "width": 6,
+        "height": 2,
+        "label": "Night",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#00e1ff",
+                "value": "night",
+                "valueType": "str"
+            },
+            {
+                "color": "#808080",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Night led",
+        "x": 1220,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "874c7558426dc0b3",
+        "type": "ui_led",
+        "z": "e3f06e9735d32e5d",
+        "order": 15,
+        "group": "b5640878e8218e75",
+        "width": 6,
+        "height": 2,
+        "label": "Unknown",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ee82ee",
+                "value": "unknown",
+                "valueType": "str"
+            },
+            {
+                "color": "#808080",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Unknown led",
+        "x": 1230,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "880ca2a7fcf8d4bc",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "b5640878e8218e75",
+        "order": 3,
+        "width": 8,
+        "height": 1,
+        "name": "",
+        "label": "Time of day",
+        "format": "",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "25",
+        "color": "#ffffff",
+        "x": 1230,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e3a1635b8e6b3628",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "b5640878e8218e75",
+        "order": 2,
+        "width": 8,
+        "height": 1,
+        "name": "",
+        "label": "▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰",
+        "format": "",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1310,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "7ffaf6da6b54662a",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "add2dd79f12b4e99",
+        "order": 4,
+        "width": 8,
+        "height": 1,
+        "name": "",
+        "label": "▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰",
+        "format": "",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1310,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "67c5db288bbde1b9",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "add2dd79f12b4e99",
+        "order": 5,
+        "width": 8,
+        "height": 1,
+        "name": "",
+        "label": "List of Alerts",
+        "format": "",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "25",
+        "color": "#ffffff",
+        "x": 1230,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "75d2062f8d28cb37",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "234b79cc97402da8",
+        "order": 4,
+        "width": 6,
+        "height": 1,
+        "name": "",
+        "label": "▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰",
+        "format": "",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1310,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "cd7c8a2133fd3c1e",
+        "type": "ui_slider",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "label": "Morning Threshold",
+        "tooltip": "",
+        "group": "583925e9774bb5c8",
+        "order": 2,
+        "width": 11,
+        "height": 1,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "0",
+        "max": "1000",
+        "step": 1,
+        "className": "",
+        "x": 190,
+        "y": 1020,
+        "wires": [
+            [
+                "b96236640826941f"
+            ]
+        ]
+    },
+    {
+        "id": "b96236640826941f",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "Set Morning Threshold",
+        "func": "flow.set('morningThreshold', msg.payload);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 1020,
+        "wires": [
+            [
+                "cc53123739e8c353"
+            ]
+        ]
+    },
+    {
+        "id": "7b5c6349fefbce79",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "Set Night Threshold",
+        "func": "flow.set('nightThreshold', msg.payload);\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1060,
+        "wires": [
+            [
+                "d6d0246fb2098b9e"
+            ]
+        ]
+    },
+    {
+        "id": "5dc9fd9449c7568e",
+        "type": "ui_slider",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "label": "Night Threshold",
+        "tooltip": "",
+        "group": "583925e9774bb5c8",
+        "order": 4,
+        "width": 11,
+        "height": 1,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "1000",
+        "step": 1,
+        "className": "",
+        "x": 180,
+        "y": 1060,
+        "wires": [
+            [
+                "7b5c6349fefbce79"
+            ]
+        ]
+    },
+    {
+        "id": "f84bdc2424bcb7a9",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "583925e9774bb5c8",
+        "order": 3,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}} > Night",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 910,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "e67bbd8b0a5ed0ef",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "583925e9774bb5c8",
+        "order": 5,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}} < Morning",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 910,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "4d04b78c83a0d22e",
+        "type": "inject",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "num",
+        "x": 530,
+        "y": 980,
+        "wires": [
+            [
+                "cc53123739e8c353"
+            ]
+        ]
+    },
+    {
+        "id": "14100d0882588f86",
+        "type": "inject",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "num",
+        "x": 530,
+        "y": 1100,
+        "wires": [
+            [
+                "d6d0246fb2098b9e"
+            ]
+        ]
+    },
+    {
+        "id": "d6d0246fb2098b9e",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "Get Night Threshold",
+        "func": "let nightThreshold = flow.get('nightThreshold') || 100;  // Default to 100 if not set\nmsg.payload = nightThreshold;  // Set the value to the message payload\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 1060,
+        "wires": [
+            [
+                "e67bbd8b0a5ed0ef"
+            ]
+        ]
+    },
+    {
+        "id": "cc53123739e8c353",
+        "type": "function",
+        "z": "e3f06e9735d32e5d",
+        "name": "Get Morning Threshold",
+        "func": "let morningThreshold = flow.get('morningThreshold') || 300;  // Default to 300 if not set\nmsg.payload = morningThreshold;  // Set the value to the message payload\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 1020,
+        "wires": [
+            [
+                "f84bdc2424bcb7a9"
+            ]
+        ]
+    },
+    {
+        "id": "32ad366c6eb8e095",
+        "type": "comment",
+        "z": "e3f06e9735d32e5d",
+        "name": "Threshold Changer",
+        "info": "",
+        "x": 230,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "79468e9a23a59076",
+        "type": "comment",
+        "z": "e3f06e9735d32e5d",
+        "name": "Light Threshold Changer",
+        "info": "",
+        "x": 270,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "751c847a8f90fd44",
+        "type": "comment",
+        "z": "e3f06e9735d32e5d",
+        "name": "Projet CLSPWC - Groupe 7 - 2024/2045",
+        "info": "",
+        "x": 250,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "88bd083ad132b95c",
+        "type": "inject",
+        "z": "e3f06e9735d32e5d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "num",
+        "x": 370,
+        "y": 660,
+        "wires": [
+            [
+                "af583d774b39af5c"
+            ]
+        ]
+    },
+    {
+        "id": "c61477dda10cb7f6",
+        "type": "ui_text",
+        "z": "e3f06e9735d32e5d",
+        "group": "583925e9774bb5c8",
+        "order": 1,
+        "width": 14,
+        "height": 1,
+        "name": "",
+        "label": "Night < Unknown < Morning",
+        "format": "",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "19",
+        "color": "#ffffff",
+        "x": 840,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "e81d1304f9f3bda1",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "3a1dcb773a78d750",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "f92e02415e3201f2",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "c01e3cca4ba12a2d",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "99cfbc2270e12d98",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 6,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "f1035c30b4e154eb",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 7,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d38a2b9a755835b5",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 8,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "73153081daadebfe",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 9,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "f76445901ab02554",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 10,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "3ed3d0f974819569",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 11,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "a4a7bb59ea7eba94",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 12,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "aa6ab78143974f8f",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 13,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "a5f7d6e919ae1415",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 14,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "909a639db42f84a8",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 15,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "3017a945fbd77863",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 16,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "97877f2f42455835",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "f3f3d72da8e0a0a6",
+        "order": 17,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "70d6ad67e5fd1f60",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "234b79cc97402da8",
+        "order": 2,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "524884ec5d67b03c",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "234b79cc97402da8",
+        "order": 6,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "e817e3cf88efa886",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "234b79cc97402da8",
+        "order": 8,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "3f613fa89d1f30f5",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "234b79cc97402da8",
+        "order": 10,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "4cc18bee72bc190a",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "234b79cc97402da8",
+        "order": 11,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "4428f4df2933bb2e",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "b5640878e8218e75",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d94eeca9479201bb",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "b5640878e8218e75",
+        "order": 6,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "795183783be2c614",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "b5640878e8218e75",
+        "order": 7,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "44b38bf52c837d3a",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "b5640878e8218e75",
+        "order": 8,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "532e093b237e46ef",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "b5640878e8218e75",
+        "order": 9,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "347500591f37dc77",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "b5640878e8218e75",
+        "order": 11,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "4f0b564e42faf20f",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "b5640878e8218e75",
+        "order": 12,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "61db4f94726ed2bc",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "b5640878e8218e75",
+        "order": 13,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "55764a8f7f1977fe",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "b5640878e8218e75",
+        "order": 14,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d7912a52f96c1eb3",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "b5640878e8218e75",
+        "order": 16,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "863be89b4a19419f",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "b5640878e8218e75",
+        "order": 17,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "962e675d3465d5d7",
+        "type": "ui_spacer",
+        "z": "e3f06e9735d32e5d",
+        "name": "spacer",
+        "group": "b5640878e8218e75",
+        "order": 18,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "5ba7f60809348175",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "my_influxdb",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "b5640878e8218e75",
+        "type": "ui_group",
+        "name": "Light Detector",
+        "tab": "33b40955f4d4b92f",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "234b79cc97402da8",
+        "type": "ui_group",
+        "name": "",
+        "tab": "a309c8a19ab42cb2",
+        "order": 1,
+        "disp": false,
+        "width": 30,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6d85d11fa4458ead",
+        "type": "ui_group",
+        "name": "Accelerometer",
+        "tab": "33b40955f4d4b92f",
+        "order": 2,
+        "disp": true,
+        "width": 14,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "add2dd79f12b4e99",
+        "type": "ui_group",
+        "name": "Alert Detector",
+        "tab": "33b40955f4d4b92f",
+        "order": 3,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "583925e9774bb5c8",
+        "type": "ui_group",
+        "name": "Light Settings",
+        "tab": "33b40955f4d4b92f",
+        "order": 4,
+        "disp": true,
+        "width": "14",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "33b40955f4d4b92f",
+        "type": "ui_tab",
+        "name": "Stats",
+        "icon": "data_usage",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a309c8a19ab42cb2",
+        "type": "ui_tab",
+        "name": "Map",
+        "icon": "map",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]
