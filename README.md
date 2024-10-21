@@ -23,12 +23,12 @@ Cette application mobile utilise les capteurs intégrés du smartphone pour surv
 
 - Alerte en Cas de Dépassement : Si la vitesse dépasse le seuil défini :
 
-Une première alerte sonore et visuelle est envoyée au conducteur pour l'informer du dépassement de la vitesse autorisée, l'invitant à ralentir.
-Notification Automatique : Si le conducteur ne réduit pas sa vitesse dans un délai imparti :
+    - Une première alerte sonore et visuelle est envoyée au conducteur pour l'informer du dépassement de la vitesse autorisée, l'invitant à ralentir.
+    - Notification Automatique : Si le conducteur ne réduit pas sa vitesse dans un délai imparti ou détection d'un mouvement brusque a travers accelerometre  :
 
-L'application envoie automatiquement une notification aux contacts d'urgence ou au centre de sécurité. Cette notification contient :
-La localisation GPS exacte.
-L'heure précise de l'incident.
+      L'application envoie automatiquement une notification aux contacts d'urgence ou au centre de sécurité. Cette notification contient :
+        - La localisation GPS exacte.
+        - L'heure précise de l'incident.
 
 
 # Node-RED Dashboard Setup

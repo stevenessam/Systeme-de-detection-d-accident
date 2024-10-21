@@ -687,7 +687,7 @@
         "id": "bf7da4f16110cdb4",
         "type": "function",
         "z": "e3f06e9735d32e5d",
-        "name": "function light",
+        "name": "function light time of day",
         "func": "msg.payload = Number(msg.req.params.light);  // Convert the light value to a number\nlet lightValue = msg.payload;\n\n// Determine which time of day it is based on the light value\nif (lightValue > 300) {\n    msg.payload = \"morning\";\n} else if (lightValue >= 100 && lightValue <= 300) {\n    msg.payload = \"unknown\";\n} else if (lightValue < 100) {\n    msg.payload = \"night\";\n}\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
@@ -695,7 +695,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 650,
+        "x": 690,
         "y": 360,
         "wires": [
             [
@@ -870,7 +870,7 @@
         "width": 8,
         "height": 1,
         "name": "",
-        "label": "Alert List",
+        "label": "List of Alerts",
         "format": "",
         "layout": "col-center",
         "className": "",
@@ -878,7 +878,7 @@
         "font": "",
         "fontSize": "25",
         "color": "#ffffff",
-        "x": 1180,
+        "x": 1190,
         "y": 660,
         "wires": []
     },
