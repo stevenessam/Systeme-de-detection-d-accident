@@ -30,6 +30,12 @@ Cette application mobile utilise les capteurs intégrés du smartphone pour surv
         - La localisation GPS exacte.
         - L'heure précise de l'incident.
 
+# Commande de lancement 
+### Node-RED
+``node-red``
+
+### InfluxDB
+``.\influx.exe v1 shell``
 
 # Node-RED Dashboard Setup
 
