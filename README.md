@@ -32,10 +32,16 @@ Cette application mobile utilise les capteurs intégrés du smartphone pour surv
 
 # Commande de lancement 
 ### Node-RED
-``node-red``
+- `node-red`
 
-### InfluxDB
-``.\influx.exe v1 shell``
+### InfluxDB Site
+- `.\influxd.exe`
+
+### Interface InfluxDB Shell
+- `.\influx.exe v1 shell`
+
+### Grafana
+- `.\grafana-server.exe`
 
 # Node-RED Dashboard Setup
 
